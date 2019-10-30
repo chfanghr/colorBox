@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <title>Colors</title>
+</head>
+
+<body>
+    <label id="rl">R 0</label><input id="r"><br>
+    <label id="gl">G 0</label><input id="g"><br>
+    <label id="bl">R 0</label><input id="b"><br>
+
+    <div id="colorArea">
+        <span style="text-align:center" id="RGBText">
+            rgb(0,0,0)
+        </span>
+    </div>
+
+    <script>
+        var colors = [0, 0, 0];
+
+        ["r", "g", "b"].forEach((v) => {
+            var ele = document.getElementById(v);
+            ele.type = "range"
+            ele.value = 0;
+            ele.min = 0;
+            ele.max = 255;
+            ele.onclick = ele.onmousemove = onRGBRangeDraged;
+            ele.step = 1;
+        })
+
+        function onRGBRangeDraged() {
+            ["r", "g", "b"].forEach((v, i) => {
+                colors[i] = document.getElementById(v).value;
+                document.getElementById(v + 'l').innerHTML = v.toUpperCase() + " " + colors[i].toString();
+            });
+
+            var rgbString = "rgb(" + colors[0].toString() + "," + colors[1].toString() + "," + colors[2].toString() + ")";
+
+            document.getElementById("colorArea").style.backgroundColor = rgbString;
+            document.getElementById("RGBText").innerHTML = rgbString;
+        }
+    </script>
+
+</body>
+
+</html>
